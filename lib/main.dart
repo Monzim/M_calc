@@ -25,8 +25,8 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   var userQuestion = '';
   var userAnswer = '';
+  var storeAns = '';
 
-  final myTextStyle = TextStyle(fontSize: 3, color: Colors.deepPurple[900]);
   final List<String> buttons = [
     'c',
     'DEL',
@@ -46,14 +46,14 @@ class _HomepageState extends State<Homepage> {
     '+',
     '0',
     '.',
-    'ANS',
+    '=',
     '=',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor("#0E293B"),
+      backgroundColor: Colors.white10,
       body: Column(
         children: [
           Expanded(
@@ -62,7 +62,7 @@ class _HomepageState extends State<Homepage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   Container(
                     padding: EdgeInsets.all(20),
@@ -70,9 +70,9 @@ class _HomepageState extends State<Homepage> {
                     child: Text(
                       userQuestion,
                       style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   Container(
@@ -81,9 +81,9 @@ class _HomepageState extends State<Homepage> {
                     child: Text(
                       userAnswer,
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 30,
                           color: Colors.white,
-                          fontWeight: FontWeight.w300),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -108,8 +108,8 @@ class _HomepageState extends State<Homepage> {
                           });
                         },
                         buttonText: buttons[index],
-                        // color: Colors.green,
-                        color: HexColor("#F2745E"),
+                        color: Colors.greenAccent,
+                        // color: HexColor("#F2745E"),
                         textColor: Colors.black,
                       );
 
@@ -123,11 +123,32 @@ class _HomepageState extends State<Homepage> {
                           });
                         },
                         buttonText: buttons[index],
-                        // color: Colors.red,
-                        color: HexColor("#F2745E"),
+                        color: Colors.red,
+                        // color: HexColor("#F2745E"),
+                        textColor: Colors.black,
+                      );
+
+                      // ans button
+                    }
+                    // else if (index == 2) {
+                    //   return MyButton(
+                    //     buttonTapped: () {},
+                    //   );
+                    // }
+                    else if (index == 18) {
+                      return MyButton(
+                        buttonTapped: () {
+                          setState(() {
+                            storeAns = userAnswer;
+                            // equalPressed();
+                          });
+                        },
+                        buttonText: buttons[index],
+                        color: Colors.lightBlue,
                         textColor: Colors.black,
                       );
                     }
+
                     // equal button
                     else if (index == buttons.length - 1) {
                       return MyButton(
@@ -138,7 +159,8 @@ class _HomepageState extends State<Homepage> {
                         },
                         buttonText: buttons[index],
                         // color: Colors.deepPurple,
-                        color: HexColor("#43CBFF"),
+                        color: Colors.lightBlue,
+                        // color: HexColor("#43CBFF"),
                         textColor: Colors.black,
                       );
                     } else {
@@ -152,8 +174,10 @@ class _HomepageState extends State<Homepage> {
                         buttonText: buttons[index],
                         color: isOperator(buttons[index])
                             // ? Colors.deepPurple
-                            ? HexColor("#F2745E")
-                            : HexColor("#DFFFFC"),
+                            ? Colors.amber
+                            // ? HexColor("#F2745E")
+                            // : HexColor("#DFFFFC"),
+                            : Colors.cyan[100],
                         textColor: isOperator(buttons[index])
                             ? Colors.black
                             : Colors.black,
